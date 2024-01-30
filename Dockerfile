@@ -10,6 +10,8 @@ RUN apt-get update -y && \
 
 WORKDIR /
 
+RUN ln -s /lib/aarch64-linux-gnu/libc.so.6 /lib/aarch64-linux-gnu/libc.so
+
 COPY --from=builder /root/iptables-server .
 
 ENTRYPOINT ["/iptables-server"]
