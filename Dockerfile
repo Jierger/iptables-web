@@ -1,5 +1,5 @@
 FROM golang:1.17.8 AS builder
-WORKDIR /
+WORKDIR /root
 COPY . .
 RUN make
 
@@ -10,7 +10,7 @@ RUN apt-get update -y && \
 
 WORKDIR /
 
-COPY --from=builder /iptables-server .
+COPY --from=builder /root/iptables-server .
 
 ENTRYPOINT ["/iptables-server"]
 
