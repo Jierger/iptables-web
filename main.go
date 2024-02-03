@@ -81,7 +81,11 @@ func main() {
 		panic("Only Linux system is supported")
 	}
 
-	ipc, err := iptables.NewIPV4()
+	ipc, err := iptables.NewIPV4(
+		iptables.WithBinary("iptables-legacy"),
+		iptables.WithSaveBinary("iptables-legacy-save"),
+		iptables.WithRestoreBinary("iptables-legacy-restore"),
+	)
 	if err != nil {
 		panic(err)
 	}
