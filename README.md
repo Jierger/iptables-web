@@ -8,15 +8,39 @@
 ![web](./docs/iptables-web.png)
 
 ## Contents
-- [Build Instructions](#build-instructions)
+- [Docker Image](#docker-image)
 - [Installation Guide](#installation-guide)
 - [Licensing Information](#licensing-information)
 
-## Build Instructions
-### Building a Docker Image
+## Docker Image
+
+### Method: Pull Image
+
+```shell
+docker pull a00764599/iptables-web
+```
+
+### Method: Load Image
+```shell
+curl -L -o iptables-web_1.1.1.tar https://github.com/Jierger/iptables-web/releases/download/v1.1.1/iptables-web_1.1.1.tar
+docker load < iptables-web_1.1.1.tar
+```
+
+### Method: Build Image
+Source Code Get:
 
 ```shell
 git clone https://github.com/Jierger/iptables-web.git
+```
+or
+``` shell
+wget -O iptables-web.zip  https://github.com/Jierger/iptables-web/archive/refs/heads/main.zip
+```
+
+#### Docker Build
+Excludes cross-compilers, so commands need to be executed in the router system
+
+```shell
 cd iptables-web
 docker build -t iptables-web:1.1.1 .
 ```
@@ -38,7 +62,7 @@ docker run -d \
   -v /usr/lib/iptables/libxt_IP4MARK.so:/usr/lib/aarch64-linux-gnu/xtables/libxt_IP4MARK.so \
   -v /usr/lib/iptables/libxt_cgroup_MARK.so:/usr/lib/aarch64-linux-gnu/xtables/libxt_cgroup_MARK.so: \
   -p 10001:10001 \
-  iptables-web:1.1.1
+  a00764599/iptables-web:1.1.1
 ```
 - `IPT_WEB_USERNAME`: Default web authorization username (default: `admin`)
 - `IPT_WEB_PASSWORD`: Default web authorization password (default: `admin`)
